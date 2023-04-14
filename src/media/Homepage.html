@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Louis's web design</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@200&display=swap" rel="stylesheet">
+    <style>
+        *{
+            font-family: 'Roboto Mono', monospace;
+            margin: 0;
+            padding: 0;
+        }
+     
+        .main-menu{
+            font-size: 20px;
+            font-weight: bold;
+            width:100%;
+            height: 100px;
+            box-shadow: 5px 5px 5px gray;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .main-menu img{
+            margin-top: 2px;
+            margin-left: 30px;
+            height: 90px;
+            object-fit: contain;
+        }
+        .sub{ 
+            
+            width: 350px;
+            line-height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+        }
+        .sub li:hover{
+            background-color: rgb(52, 52, 52);
+            cursor: pointer;
+            list-style-type: none;
+        }
+        
+        .sub li:hover .head{
+            color: yellow;
+        }
+        .sub-menu li:hover a{
+            color: yellow;
+        }
+        .sub li:hover .sub-menu{
+            background-color: #ffffff;
+            display: block;
+        }
+      
+        .sub-menu li{
+            border-bottom: 2px solid rgb(52, 52, 52);
+        }
+       
+        .sub-menu{
+            list-style-type: none;
+            position: absolute;
+            left: 50%;
+            width: 100%;
+            transform: translateX(-50%);
+            text-align: center;
+            object-fit: cover;
+            color: black;
+            display:none;
+        } 
+        a{
+            color:#000000;
+            text-decoration: none;
+        }
+        
+        .section{
+            position: absolute;
+            top: 100px;
+            z-index: -1;
+            background: url(KeyBoard.jpg) no-repeat fixed 100%;
+            background-size: cover;
+            height: 400px;
+            width: 100%;
+        }
+        section .H1{
+            text-align: center;
+            padding-top: 100px;
+            font-size: 70px;
+            color: white;
+            letter-spacing: 40px;
+            font-weight: bolder;
+        }
+        section p{
+            margin: 0 11%; 
+            margin-top: 20px;
+            font-size: 20px; 
+            text-align: justify;
+        }
+        section h2{
+            margin-top: 40px;
+            margin-left: 10%
+        }
+        #vid{
+            display:flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+        #vid video{
+            border: 3px solid black;
+            margin-top: 70px;
+            height: 40vh;
+        }
+        .bottom{
+            height: 300px;
+            width: 100%;
+            background-color: black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .bottom img{
+            width: 100px;
+        }
+       
+    </style>
+</head>
+<body>
+        
+    <div class="section"></div>
+    <ul class="main-menu">
+        <img src="Logo.png">
+        <ul class="sub">
+            <li>
+                <a class="head">Project</a>
+                <ul class="sub-menu">
+                    <li style="border-top: 2px solid rgb(52, 52, 52);"><a href="Dynamic.html">Dynamic background</a></li>
+                    <li><a href="Destiny.html">Fixed background</a></li>
+                    <li><a href="Pullingmenu.html">Pulling menu</a></li>
+                </ul>
+            </li>
+            <li><a class="head" href="https://www.instagram.com/softdev_louis0621/">Contact</a></li>
+            <li><a class="head" href="#aboutme">About me</a></li>
+        </ul>
+    </ul>
+    <section>
+        <h1 class="H1">Louis's<br> web design</h1>
+        <h1 style="margin-top: 30vh; margin-left: 50px">My Project</h1>
+        <div id="vid">
+        
+            <video muted loop autoplay>
+                <source src="Dynamicbackground.mp4">
+            </video>
+        
+            
+            <video muted loop autoplay>
+                <source src="Fixedbackground.mp4">
+            </video>
+        
+            <video muted loop autoplay>
+                <source src="Pullinglist.mp4">
+            </video>
+        
+        </div>
+        <h1 id='aboutme'style="color:black; margin-top: 3vh; margin-left: 50px">About me</h1>
+        <h2>Who am I?</h2>
+        <p>
+            &nbsp&nbspI'm currently studying in college and pursuing bachelor's degree. About this website, I has been learning HTML for some time.
+            Since wanting to create my own project, I made this website to demonstrate my ability in this area.
+        </p>
+        <h2>What kind of ability do I have?</h2>
+        <p style="padding-bottom: 100px">
+            &nbsp&nbspI have been learning English speaking for months, and have excellent scores in TOEIC reading and listening tests.
+        </p>
+    </section>
+    <bottom class="bottom">
+        <a href="https://www.instagram.com/softdev_louis0621/"><img src="IG.jfif"></a>
+    </bottom>
+    
+</body>
+</html>

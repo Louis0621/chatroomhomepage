@@ -1,38 +1,404 @@
-.App {
-  text-align: center;
+*{
+  margin: 0;
+  padding: 0;
+  font-family: Arial;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body{
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.container{  
+  width: 100%;
+  height: 100vh;
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.main{
+  width: 100%;
+  height: 100vh;
+}
+article{
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+}
+.image{
+  position: absolute;
+  background: url(media/Programmer.jpg) no-repeat;
+  background-size: cover;
+  z-index: -99;
+  width: 100%;
+  height: 100%;  
+  filter: blur(0.5px) grayscale(0.4);
+
+}
+  /*
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-size: 100%;//This works for div tag
+  */
+
+.header{
+  position: absolute;
+  width: 100%;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 10px 0px;
+  color: rgb(255, 255, 255);
+  filter: unset;
+}
+.right h2:hover{
+  transform: scale(1.2);
+  cursor: pointer;
+}
+.left{
+  letter-spacing: 3px;
+  margin-left: 10px;
+}
+.right{
+  letter-spacing: 1px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 300px;
+
+}
+.gallery{
+  margin-top: 150px;
+  width: 80%;   
+  border-radius: 50px;
+  display: flex;
+  overflow-x: scroll;
+  align-items: center;
+}
+.Btn{
+  position: absolute;
+  top: 160px;
+  z-index: 999;
+  right: 10%;
+  width: 65px;
+  height: 35px;
+  border-radius: 20px;
+  background-color: rgb(208, 208, 208);
+  border: 4px outset rgb(173, 173, 173);
+  display: flex;
+  align-items: center;
+}
+.Btn:hover{
+  border: 4px inset  rgb(173, 173, 173);
+}
+.Btn span{
+  display: block;
+  margin-left: 5px;
+  width: 30px;
+  height: 30px;
+  background-color: rgb(139, 139, 139);
+  border-radius: 50%;
+  border: 2px solid grey;
+}
+
+.active{
+  background-color: rgb(1, 159, 1);
+  border: 4px outset green;
+}
+.active:hover{
+  border: 4px inset green;
+}
+.active span{
+  margin-left: 30px;
+  background-color: white;
+  
+}
+.gallery::-webkit-scrollbar{
+  display: none;
+}
+.gallery video{
+  width: 700px;
+  cursor: pointer;
+  display: grid;
+  grid-template-columns: auto auto auto;
+  margin: 10px;
+  filter: grayscale(1) blur(1px);
+  transform: scale(0.9);
+  transition: all 0.5s;
+  border-radius: 20px;
+}
+.News{
+  position: absolute;
+  width: 200px;
+  top: 130px;
+  line-height: 100px;
+  border-radius: 20px;
+  background-color: rgba(68, 68, 68, 0.379);
+  
+  color: rgba(255, 255, 255, 0.703);
+  text-align: center;
+}
+.span{
+  letter-spacing: 1.5px;
+  font-size: 15px;
+  font-weight: bold;
+  text-shadow:
+              2px 2px 10px rgb(92, 179, 216),
+              -2px -2px 10px rgb(92, 179, 216);
+               
+}
+.gallery video:hover{
+  filter: grayscale(0) blur(0px);
+  transform: scale(1);
+  transition: all 0.5s;
+}
+a{
+  display: block;
+  text-decoration: none;
   color: white;
 }
+section{
+  border: 2px solid black;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  color: white;
+  transition: all 1s;
+}
+section h1{
+  margin: 50px;
+  text-align: center;
+}
+section h2{
+  margin-left: 4%;
+  font-size: 25px;
+}
+.map{
+  position: relative;
+  width: 100%;
+  height: 30%;
+  bottom: 10px;
+  display: flex;
+  justify-content: center;
+}
+.map iframe{
+  width: 50%;
+  height: 100%;
+}
+.sub_section p{
+  text-align: justify;
+  font-size: 23px;
+  margin: 20px 10%;
+}
+.image_2{
+  background: url(media/Programmer2.jpg) no-repeat;
+  position: absolute;
+  z-index: -1;
+  width: 100%;
+  height: 100vh;
+  background-size: cover;
+  filter:blur(1px);
+}
+.guide{
+  position: fixed;
+  top: 20%;
+  z-index: 2;
+  right: 0px;
+  height: 50%;
+  padding: 0 20px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: flex-end;
+}
+.guideline{
+  height: calc(100% + 100px);
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.249);
+  width: 2px;
+  transition: all 0.1s;
+}
+.guide li{
+  position: relative;
+  list-style-type: none;
+  display: block;
+  right: -6px;
+  text-align: center;
+  opacity: 0.5;
+  width: 17px;
+  border-radius: 2px;
+  transition: all 0.5s;
+}
+.guide:hover .guideline{
+  transition: all 0.1s;
+  box-shadow: 0px 0px 10px white;
+}
+.final{
+  position: absolute;
+  background: url(media/commenting.jpg) no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 100vh;
+  z-index: -1;
 
-.App-link {
-  color: #61dafb;
+}
+.back{
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+}
+.chatRoom{
+  width: 900px;
+  height: 600px;
+  background-color: transparent;
+  border: 1px dashed white;
+  border-radius: 20px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+.chatRoom div{
+  margin: 2px 10%;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.chatRoom::-webkit-scrollbar{
+  width: 12px;
+}
+.chatRoom::-webkit-scrollbar-track{
+  background-color: transparent;
+}
+.chatRoom::-webkit-scrollbar-thumb{
+  background-color: white;
+  border-radius: 10px;
+}
+.user{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.profile{
+  margin-top: 15px;
+  width: 50px;
+}
+
+.chatbox{
+  display: flex;
+  justify-content: space-between;
+}
+.chatbox p, .delete{
+  margin-top: 20px;
+}
+.profileName{
+  margin: 10px;
+  font-size: 20px;
+}
+.submit{
+  background-color: transparent;
+  font-size: 1rem;
+  color: white;
+  line-height: 5px;
+  width: 80px;
+  height: 25px;
+  border: 2px outset black;
+  border-radius: 10px;
+}
+
+.submit:hover{
+  background-color: rgba(255, 255, 255, 0.089);
+  border: 2px inset black;
+}
+.inputContent{
+  background-color: rgba(255, 255, 255, 0.788);
+  border-radius: 5px;
+}
+.inputContent:hover{
+  background-color: white;
+}
+.inputContent:focus{
+  
+  background-color: white;
+}
+@media(max-width: 600px){
+  body{
+    overflow: scroll;
+    color: white;
   }
-  to {
-    transform: rotate(360deg);
+  .header{
+      font-size: 10px;
+  }
+  .guide{
+    display: none;
+  }
+  .guide li{
+      right: -9px;
+  }
+  .gallery video{
+      width: 350px;
+      margin: 5px;
+      border-radius: 10px;
+  }
+  .sub_section p{
+      font-size: 10px;
+      margin: 20px 10%;
+  }
+
+  section h2{
+      font-size: 20px;
+  }
+  .Btn{
+      width: 40px;
+      height: 20px;
+      border: 2px outset rgb(173, 173, 173);
+  }
+  .Btn span{
+      margin-left: 2px;
+      width: 15px;
+      height: 15px;
+      background-color: rgb(139, 139, 139);
+      border-radius: 50%;
+      border: 2px solid grey;
+  }
+  .Btn:hover{
+      border: 2px inset  rgb(173, 173, 173);
+  }
+  
+  .active{
+      background-color: rgb(1, 159, 1);
+      border: 2px outset green;
+  }
+  .active:hover{
+      border: 2px inset green;
+  }
+  .active span{
+      margin-left: 20px;
+      background-color: white;
+      
+  }
+}
+@media(max-width: 300px){
+  .header{
+      font-size: 5px;
+  }
+  .guide{
+    
+      right: -35px;
+      padding: 0px 70px;
+  }
+  .guide li{
+      right: -5px;
+  }
+  .sub_section p{
+      margin: 20px 12%;
+  }
+  section h1{
+      font-size: 15px;
+  }
+  section h2{
+      font-size: 10px;
   }
 }

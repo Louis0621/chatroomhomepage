@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            color: white;
+        }
+        body{
+            background: black;
+
+        }
+        h1{
+            text-align: center;
+        }
+        p{
+            font-size: 40px;
+            padding-left: 30px;
+            padding-right: 30px;
+        }
+        *{  
+            font-family:'Times New Roman';
+        }
+        .section{
+            background: url(https://th.bing.com/th/id/R.42ea4a982aa071d0c82cde9e6d33ae73?rik=oKkS%2b8%2fbXdtrzw&pid=ImgRaw&r=0)
+                repeat fixed 100%;
+            background-position: center;
+            -webkit-text-stroke: 0.6px black;
+            font-weight: bold;
+            margin-left: 0;
+            margin-right: 0;
+            
+        }
+    
+        #top{
+            padding-top: 20px;
+            padding-bottom: 10px;
+            font-size: 30px;
+        }
+        #goto li{
+            color: white;
+            display: inline;
+            margin-right: 25px;
+            float: right;/*We apply this feature to all elements with li as their tags*/
+        }
+        #earth{
+            background: url(https://th.bing.com/th/id/R.b4d6791bea133287b676e18a1cd143f0?rik=JmSHELPJTWHd%2bg&riu=http%3a%2f%2fup.deskcity.org%2fpic_source%2fb4%2fd6%2f79%2fb4d6791bea133287b676e18a1cd143f0.jpg&ehk=hfC8dl9MQMT3BEwlONdX0Dwc0C%2bs8SDpEBrpAGtLz1E%3d&risl=&pid=ImgRaw&r=0)
+                repeat fixed 100%;
+            height: 400px;
+            background-position: center;
+        }
+    </style>
+</head>
+<body>
+   
+      
+    <div id="top" >
+        <ul id="goto">
+            <li><a href="#d2">Ch2</a></li>
+            <li><a href="#d1">Ch1</a></li>
+        </ul>
+        <button style="font-size: 30px; background-color: black; border:3px solid white;" onclick="down(0)">Ch1</button>
+        <button style="font-size: 30px; background-color: black; border:3px solid white;" onclick="down(1)">Ch2</button>
+        <h1>Destiny</h1>
+        
+    </div>
+
+    <div class="section">
+        
+        <p style="text-align: center">trailer</p>
+        <div style="text-align: center">
+            <iframe width="1000" height="563" src="https://www.youtube.com/embed/hdWkpbPTpmE" title="Destiny 2  - Official Launch Trailer" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            </div>
+    </div>   
+    <h1>Chapter1</h1>
+    <div id="d1">
+        <p id= "tct">
+            Destiny 2 includes 4 new Patrol zones, Nessus, Io, Titan, and the 
+            European Dead Zone, the largest open world ever made by Bungie,
+            filled to the brim with new enemies, weapons, armor, and activities 
+            such as public events, dungeons known as "Lost Sectors", mini-quests
+            called adventures, and much more to do and explore.<br>
+        </p>
+    </div>
+    <div id="earth"></div>
+    <h1>Chapter2</h1>
+
+    <div id="d2">
+        <p id="tct">
+            The game features downloadable content, but the DLC will be released 
+            after the base game.[11] The first two expansion packs will be centered 
+            around the cult of the exiled Warlock Osiris, as well as the ancient Warmind
+            Rasputin for expansions 1 and 2, respectively. The third and largest
+            expansion will focus on the death of Cayde-6 and hunting down the barons 
+            of the Tangled Shore. Players that have preordered Destiny 2 with the year 
+            1 expansion pass will automatically receive access to the first two expansions
+            upon release for the general public to purchase.<br>
+        </p>
+    </div>
+    <script>
+        let x = document.querySelectorAll('#tct');
+        Array.from(x).forEach(element=>{element.innerHTML = "&nbsp;&nbsp" + element.innerHTML});
+        function down(index){
+            x[index].scrollIntoView();
+        }
+    </script>
+</body>
+</html>

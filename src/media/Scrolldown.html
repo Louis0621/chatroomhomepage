@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            font-family: 'poppins', "sans-serif";
+            box-sizing: border-box;
+        }
+        .hero{
+            background: #1d2026;
+            min-height: 100vh;
+            width: 100vw;
+            color: #fff;
+            position: relative;
+        }
+        nav{
+            display: flex;
+            align-items: center;
+            padding: 20px 8%;
+        }
+        nav .menu-img{
+            width: 25px;
+            margin-right: 20px;
+            cursor: pointer;
+
+        }
+        nav .logo{
+            width: 160px;
+            cursor: pointer;
+        }
+        nav ul{
+            flex: 1;
+            text-align: right;
+        }
+        nav ul li{
+            display: inline-block;
+            list-style: none;
+            margin: 0 20px;
+        }
+        nav ul li a{
+            text-decoration: none;
+            color: white;
+    
+        }
+        button{
+            background: #efefef;
+            height: 30px;
+            width: 60px;
+            border-radius: 20px;
+            border: 0;
+            outline: 0;
+        }
+        button span{
+            display: block;
+            background: #999;
+            height: 26px;
+            width: 26px;
+            border-radius: 50%;
+            margin-left: 2px;
+            transition: background 0.5s, margin-left 0.3s;
+        }
+        .lamp-container{
+            position: absolute;
+            top: -20px;
+            left: 22%;
+            width: 200px;
+        }
+        .lamp{
+            width: 100%;
+        }
+        .light{
+            position: absolute;
+            top: 97%;
+            left: 50%;
+            transform: translate(-50%);
+            width: 700px;/*making it smaller*/
+            margin-left: -10px;
+            opacity: 0;
+            transition: opacity 1s;
+        }
+        .text-container{
+            max-width: 600px;
+            margin-top: 7%;
+            margin-left: 50%;
+        }
+        .text-container h1{
+            font-size: 80px;
+            font-weight: 400;
+        }
+        .text-container a{
+            text-decoration: none;
+            background: #00986f;
+            padding: 14px 40px;
+            color: #fff;
+            display: inline-block;
+            font-size: 18px;
+            margin-top: 30px;
+            border-radius: 30px;
+        }
+        .control{
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            margin-top: 150px;
+
+        }
+        .control .line{
+            width: 250px;
+            height: 4px;
+            background-color: #fff;
+            margin: 0 20px;
+            border-radius: 2px;
+        }
+        .control .line span{
+            width: 50%;
+            height: 8px;
+            margin-top: -2px;
+            border-radius: 4px;
+            background-color: #00986f;
+            display: block;
+        }
+        .active{
+            background-color: green;
+        }
+        .active span{
+            background: #fff;
+            margin-left: 35px;
+        }
+        .on{
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <nav>
+            <img src="images/menu.png" class="menu-img">
+            <img src="images/logo.png" class="logo">
+            <ul>
+                <li><a href="">Latest</a></li>
+                <li><a href="">Modern</a></li>
+                <li><a href="">Affordable</a></li>
+            </ul>
+            <button type="button" onclick="toggleBtn()" id="btn"><span></span></button>
+        </nav>
+        <div class="lamp-container">
+    
+            <img src="images/lamp.png" class='lamp' alt="lamp">
+            <img src="images/light.png" class="light" id='light' alt="light">
+        </div>
+        <div class="text-container">
+            <h1>Latest<br> in Lighting</h1>
+            <p>
+                This is the first lamp from our company. We're making a huge collection of modern lamps in all categories from home use to office use.
+            </p>
+            <a href="">Check All Collections</a>
+            <div class="control">
+                <p>04</p>
+                <div class="line">
+                    <span></span>
+                </div>
+                <p>05</p>
+            </div>
+        </div>
+    </div>
+    <script>
+        let btn = [2];
+        btn[0] = document.getElementById("btn");
+        btn[1] = document.getElementById("light");
+        function toggleBtn(){
+            btn[0].classList.toggle("active");
+            btn[1].classList.toggle("on");
+        }
+        
+    </script>
+</body>
+</html>
