@@ -5,30 +5,26 @@ import video2 from "./media/Fixedbackground.mp4"
 import video3 from "./media/Coffe.mp4";
 import video4 from "./media/Pullinglist.mp4";
 import React, {useEffect, useRef, useState} from 'react';
-
+import {useAuthState} from 'react-firebase-hooks/auth';
 //firebase import
 import {db, googleProvider, auth} from './Auth.js';
 import {signInWithPopup, signOut} from 'firebase/auth';
 //firestore
 import {doc,addDoc, collection, deleteDoc, getDocs} from 'firebase/firestore';
 function App() {
+  
   //Sign up
-  const [show, setShow] = useState(false);
-  const confirm = ()=>{
-    if(auth.currentUser) setShow(true);
-    else setShow(false);
-  }
+  //confirm
+  const [confirmUser] = useAuthState(auth);
+  
   const signUp = async()=>{
     await signInWithPopup(auth, googleProvider);
-    confirm();
   }
   const logOut = async()=>{
     await signOut(auth, googleProvider);
-    confirm();
   }
   const videoList = [video, video2, video3, video4];
   const title = ["Dynamic", "Fixed Background", "Grid Iframe Wall", "Pulling Menu"];
-
   //Navigationbar
   let curPage = 0;
   const barRef = [useRef(null), useRef(null), useRef(null)];
@@ -51,16 +47,13 @@ function App() {
     navRef[curr].current.scrollIntoView({behavior: 'smooth'});
     for(let i = 0; i < navRef.length; ++i){
         if(i !== curr){
-          console.log(i, curr);
-          navRef[i].current.style.color = 'black';
-          barRef[i].current.style.backgroundColor = 'transparent';
+         barRef[i].current.style.backgroundColor = 'transparent';
           barRef[i].current.style.opacity = '0.5';
           barRef[i].current.style.color = 'white';
           
           
         }
     }
-    navRef[curr].current.style = 'white';
     barRef[curr].current.style.backgroundColor = 'white';
     barRef[curr].current.style.opacity = '1';
     barRef[curr].current.style.color = 'black';
@@ -116,59 +109,61 @@ function App() {
 
   //windowListener
   useEffect(() => {
-    confirm();
-    if(window.innerWidth <= 600){
-      const handleResize = ()=>{
-        for(let i = 0; i < navRef.length; ++i){
-          navRef[i].current.style.color = 'white';
-        }
-      }
-
-      window.addEventListener('resize', handleResize);
-
-      return () => {
-        window.removeEventListener('resize', handleResize);
-      };
-        
-    }
-    else{
-      manipulate(0);
-    }
     getContentList();
-  }, [window.innerWidth, ]);
+    manipulate(0);
+    try{
+      document.createEvent("TouchEvent");
+      document.querySelector('body').style.overflowY = 'scroll';
+      document.querySelector('.guide').style.display = 'none';
+    }catch(e){
+      console.error('not a cellphone');
+    }
+  }, []);
 
   const [message, setMessage] = useState('');
-  const chatRef = collection(db, 'chat');
+  const chatRef = collection(db, 'chat2');
   const [chatList, setChatList] = useState([]);
-  const [curr, setCurr] = useState('');
   const handleOnClick = async()=>{
     if(message !== '' && message.length < 70){
-      const time = new Date();
-      setCurr(()=>{return time.toLocaleString()});
+      const curr = new Date();
+
+      const wholetime = [curr.getFullYear(), (curr.getMonth() + 1), curr.getDate(), curr.getHours(), curr.getMinutes(), curr.getSeconds()]
+      for(let i = 0; i < wholetime.length; ++i){
+        if(i > 0)
+          if(wholetime[i] < 10){
+            wholetime[i] = "0" + wholetime[i];
+          }
+      }
+      const string = await wholetime[0] + "/" + wholetime[1] +"/" + wholetime[2] + " " + wholetime[3] + ":" + wholetime[4];
+      
       await addDoc(chatRef, {
         content: message,
         user: auth.currentUser.displayName,
-        createdAt: curr,
+        createdAt: string,
+        realtime: wholetime.join('')
       });
-        
-      getContentList();
     }
-    else{
+    else if(message.length >= 70){
       alert("Your input can only contain at most 70 characters");
     }
+    else if(message === ''){
+      alert("You didn't type anything");
+    }
+    getContentList();
     setMessage('');
   }
   const getContentList = async ()=>{
+    
     const chattingContent = await getDocs(chatRef);
-    const data = chattingContent.docs.map((doc)=>({
+    let data = chattingContent.docs.map((doc)=>({
       ...doc.data(),
       id: doc.id,
     }))
+    data.sort((a, b)=>a.realtime - b.realtime);
     setChatList(data);
-    console.log(data);
   }
   const handleDelete = async(id)=>{
-    const data = doc(db, 'chat', id);
+    const data = doc(db, 'chat2', id);
     await deleteDoc(data);
     getContentList();
   }
@@ -189,13 +184,13 @@ function App() {
           <div className="main">
               <div className="image"></div>
                 <div className="header">
-                    <div style = {{position: "absolute",top:"70px",height: "1px", width: "90%",marginLeft: "2%",paddingBottom: "20px",borderBottom: "2px solid rgb(159, 159, 159)"}}></div>
+                    <div className ="decoration"></div>
                     <div className="left" style={{cursor:"default"}}>
                         <h1>Louis's WebPage</h1>
 
                     </div>
                     <div className='right'>  
-                      {show === true ? <h2 onClick = {logOut}>Sign out</h2> :<h2 onClick = {signUp}>Sign up</h2>}
+                      {confirmUser ? <h2 onClick = {logOut}>Sign out</h2> :<h2 onClick = {signUp}>Sign up</h2>}
                     </div>
                 </div>
               <article>
@@ -219,7 +214,7 @@ function App() {
               <h1>About me</h1>
               <h2>Who am I?</h2>
               <p>
-                  &nbsp&nbsp
+                  &nbsp;&nbsp;
                   I'm currently studying in college and pursuing bachelor's degree. About this website, I has been learning HTML for some time.
                   Since wanting to create my own project, I made this website to demonstrate my ability in this area.
               </p>
@@ -237,13 +232,13 @@ function App() {
         <section className='desti back' ref={navRef[2]}>
           <div className='final'></div>
           <div className='chatRoom'>
-            { show === true ? 
+            { confirmUser ? 
             <div className='user'>
               
               <img className = 'profile'  src={auth.currentUser?.photoURL} alt = 'none'/>
               <h4 className='profileName'>{auth.currentUser?.displayName}</h4>
               <div style={{display: 'flex'}}>
-                <input className = "inputContent"type='text' onChange={(e)=>setMessage(e.target.value)}/>
+                <input value = {message} className = "inputContent"type='text' onChange={(e)=>setMessage(e.target.value)}/>
                 <button className = "submit" onClick={handleOnClick}>Submit</button>
                 
               </div>
@@ -252,13 +247,21 @@ function App() {
             }
             <div>
               {chatList.map((ele, i)=>(
-                <div className='chatbox'>
-                  <p key={i}>{ele.user + ' said: '} {ele.content.length > 20 ? ele.content.substring(0, 20) + '\n' + ele.content.substring(20, ele.content.length) : ele.content}</p>
-                  {show === true ? <button className = 'delete submit'onClick={()=>handleDelete(ele.id)}>Delete</button>: ''}
+                <div key={i} className='chatbox'>
+                  <p >{ele.user + ' said: '} {ele.content}
+                  <br/>
+                  <span style={{fontSize:'0.5rem', opacity:".6", width: '100px'}}>{ele.createdAt ? ele.createdAt: ''}</span>
+                  </p>
+                  
+                  {confirmUser ? <button className = 'delete submit'onClick={()=>handleDelete(ele.id)}>Delete</button>: ''}
+                
                 </div>
                 ))}
             </div>
           </div>
+          <br/>
+          <a className = "link" href={'https://chatroom-9e07f.web.app'} target="_blank" rel="noopener noreferrer">另一個聊天網站(用來demo):<br/>https://chatroom-9e07f.web.app</a>
+          <a className = "link" href={'./download/app-release.apk'} download>Download my timer app for Android mobile devices</a>
         </section>
     </div>
   );
